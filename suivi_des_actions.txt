@@ -1,0 +1,42 @@
+
+Suivi des actions menées
+
+Etape 2
+- identifier les tests unitaires qui échouent par intermitence
+	o: nearAllAttractions() (en plus d'être lent)
+		java.util.ConcurrentModificationException (run classique)
+		org.opentest4j.AssertionFailedError: expected: <26> but was: <1> (run debug, si pause entre li 589 et li 60)
+... comprendre ce qu'il se passe dans calculateRewards(...)
+	o sleep de 1 seconde juste après le démarrage du tracker (et juste avant calculateRewards(...)
+		 => échec du test par Failure #2
+		 Pourquoi ? je ne sais pas
+- correction dans User.java li 73 : il manquait un ".attractionName" et le "!" était en trop
+	=> le test passe
+
+
+TODO :
+- commencer étape 2
+
+Ressources :
+- cours sur github avancé
+	https://openclassrooms.com/fr/courses/7688581-devenez-un-expert-de-git-et-github
+	fork, pull request, conflit, historique, workflow (ligne de conduite commune) et gitflow, hooks (script), client GUI git
+- Avoiding the ConcurrentModificationException in Java
+	https://www.baeldung.com/java-concurrentmodificationexception
+- Modify Arrays on Multiple Threads With CopyOnWriteArrayList
+	https://openclassrooms.com/fr/courses/5684021-scale-up-your-code-with-java-concurrency/6677541-modify-arrays-on-multiple-threads-with-copyonwritearraylist
+	
+
+
+Done :
+
+Etape 1
+- récupération des documents
+- récupération du code et création du projet Eclipse
+- installation des 3 bibliothèques particulières
+- prise en main du projet (lecture)
+- executer le projet et tester les tests
+- parcourir cours sur git
+- passer à l'étape 2
+
+
