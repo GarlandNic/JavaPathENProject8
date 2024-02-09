@@ -95,12 +95,26 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
+ 	// TODO : Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> nearbyAttractions = new ArrayList<>();
+		List<Double> distances = new ArrayList<>();
 		for (Attraction attraction : gpsUtil.getAttractions()) {
-			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-				nearbyAttractions.add(attraction);
+			double dist = rewardsService.getDistance(attraction, visitedLocation.location);
+			int i = 0;
+			for(i=0 ; i<nearbyAttractions.size() ; i++) {
+				if(dist < distances.get(i)) break;
 			}
+			nearbyAttractions.add(i, attraction);
+			distances.add(i, dist);
+			if(nearbyAttractions.size() > 5) {
+				nearbyAttractions.remove(5);
+				distances.remove(5);
+			}
+
+//			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
+//				nearbyAttractions.add(attraction);
+//			}
 		}
 
 		return nearbyAttractions;

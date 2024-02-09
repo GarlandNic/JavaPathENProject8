@@ -12,6 +12,13 @@ Etape 2
 		 Pourquoi ? je ne sais pas
 - correction dans User.java li 73 : il manquait un ".attractionName" et le "!" était en trop
 	=> le test passe
+	
+Etape 3
+- faire tourner la fonction de test qui ne marche pas
+- lire le TODO du getNearbyAttractions
+- implémenter le code qui va récupérer les 5 plus proches
+	o bonus : dans l'ordre de proximité
+-> implémenter le code qui va transformer la liste en JSON
 
 
 TODO :
