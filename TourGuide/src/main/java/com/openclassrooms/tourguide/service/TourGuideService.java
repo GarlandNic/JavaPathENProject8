@@ -95,7 +95,7 @@ public class TourGuideService {
 		return visitedLocation;
 	}
 
- 	// TODO : Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
+ 	// Get the SORTED closest five tourist attractions to the user - no matter how far away they are.
 	public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
 		List<Attraction> nearbyAttractions = new ArrayList<>();
 		List<Double> distances = new ArrayList<>();
@@ -111,13 +111,16 @@ public class TourGuideService {
 				nearbyAttractions.remove(5);
 				distances.remove(5);
 			}
-
-//			if (rewardsService.isWithinAttractionProximity(attraction, visitedLocation.location)) {
-//				nearbyAttractions.add(attraction);
-//			}
 		}
-
 		return nearbyAttractions;
+	}
+
+	public double getDistance(Location loc1, Location loc2) {
+		return rewardsService.getDistance(loc1, loc2);
+	}
+
+	public int getRewardPoints(Attraction attraction, User user) {
+		return rewardsService.getRewardPoints(attraction, user);
 	}
 
 	private void addShutDownHook() {

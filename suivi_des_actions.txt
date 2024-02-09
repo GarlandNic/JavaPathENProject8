@@ -6,23 +6,20 @@ Etape 2
 	o: nearAllAttractions() (en plus d'être lent)
 		java.util.ConcurrentModificationException (run classique)
 		org.opentest4j.AssertionFailedError: expected: <26> but was: <1> (run debug, si pause entre li 589 et li 60)
-... comprendre ce qu'il se passe dans calculateRewards(...)
+- comprendre ce qu'il se passe dans calculateRewards(...)
 	o sleep de 1 seconde juste après le démarrage du tracker (et juste avant calculateRewards(...)
 		 => échec du test par Failure #2
 		 Pourquoi ? je ne sais pas
+		 ? conflit entre le thread du tracker et le thread principal ?
+		 : ils utilisent tous les deux calculateRewards (qui ajoute potentiellement des trucs dans userReward)
+... comprendre CopyOnWriteArrayList
+
 - correction dans User.java li 73 : il manquait un ".attractionName" et le "!" était en trop
 	=> le test passe
-	
-Etape 3
-- faire tourner la fonction de test qui ne marche pas
-- lire le TODO du getNearbyAttractions
-- implémenter le code qui va récupérer les 5 plus proches
-	o bonus : dans l'ordre de proximité
--> implémenter le code qui va transformer la liste en JSON
 
 
 TODO :
-- commencer étape 2
+- commencer étape 4
 
 Ressources :
 - cours sur github avancé
@@ -46,4 +43,11 @@ Etape 1
 - parcourir cours sur git
 - passer à l'étape 2
 
+
+Etape 3
+- faire tourner la fonction de test qui ne marche pas
+- lire le TODO du getNearbyAttractions
+- implémenter le code qui va récupérer les 5 plus proches
+	o bonus : dans l'ordre de proximité
+- implémenter le code qui va transformer la liste en JSON
 
