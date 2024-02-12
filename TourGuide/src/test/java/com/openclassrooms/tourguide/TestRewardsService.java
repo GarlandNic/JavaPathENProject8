@@ -23,7 +23,6 @@ import com.openclassrooms.tourguide.user.UserReward;
 
 public class TestRewardsService {
 
-	@Disabled
 	@Test
 	public void userGetRewards() {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -40,8 +39,7 @@ public class TestRewardsService {
 		tourGuideService.tracker.stopTracking();
 		assertTrue(userRewards.size() == 1);
 	}
-
-	@Disabled
+	
 	@Test
 	public void isWithinAttractionProximity() {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -60,13 +58,6 @@ public class TestRewardsService {
 		InternalTestHelper.setInternalUserNumber(1);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
-		// TODO : to be removed
-//		try {
-//			TimeUnit.SECONDS.sleep(1);
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
-		//
 		rewardsService.calculateRewards(tourGuideService.getAllUsers().get(0));
 		List<UserReward> userRewards = tourGuideService.getUserRewards(tourGuideService.getAllUsers().get(0));
 		tourGuideService.tracker.stopTracking();

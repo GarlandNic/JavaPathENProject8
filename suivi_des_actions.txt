@@ -1,35 +1,36 @@
 
 Suivi des actions menées
 
-Etape 2
-- identifier les tests unitaires qui échouent par intermitence
-	o: nearAllAttractions() (en plus d'être lent)
-		java.util.ConcurrentModificationException (run classique)
-		org.opentest4j.AssertionFailedError: expected: <26> but was: <1> (run debug, si pause entre li 589 et li 60)
-- comprendre ce qu'il se passe dans calculateRewards(...)
-	o sleep de 1 seconde juste après le démarrage du tracker (et juste avant calculateRewards(...)
-		 => échec du test par Failure #2
-		 Pourquoi ? je ne sais pas
-		 ? conflit entre le thread du tracker et le thread principal ?
-		 : ils utilisent tous les deux calculateRewards (qui ajoute potentiellement des trucs dans userReward)
-... comprendre CopyOnWriteArrayList
+Etape 4 :
+- faire tourner les tests de performance
+	-> ConcurrentModificationException
+	=> il faut que je finisse l'étape 2 : Done !
+- identifier les endroits où ça lague
+- lire les cours/ressources
+- modif du code ...
+- mettre à jour le excel pour comparer les performances
 
-- correction dans User.java li 73 : il manquait un ".attractionName" et le "!" était en trop
-	=> le test passe
+
 
 
 TODO :
-- commencer étape 4
+- identifier les endroits où ça lague
+
+
 
 Ressources :
-- cours sur github avancé
+1 cours sur github avancé
 	https://openclassrooms.com/fr/courses/7688581-devenez-un-expert-de-git-et-github
 	fork, pull request, conflit, historique, workflow (ligne de conduite commune) et gitflow, hooks (script), client GUI git
-- Avoiding the ConcurrentModificationException in Java
+2 Avoiding the ConcurrentModificationException in Java
 	https://www.baeldung.com/java-concurrentmodificationexception
-- Modify Arrays on Multiple Threads With CopyOnWriteArrayList
+2 Modify Arrays on Multiple Threads With CopyOnWriteArrayList
 	https://openclassrooms.com/fr/courses/5684021-scale-up-your-code-with-java-concurrency/6677541-modify-arrays-on-multiple-threads-with-copyonwritearraylist
-	
+4 Guide To CompletableFuture
+	https://www.baeldung.com/java-completablefuture	
+4 Connect Concurrent Actions Using CompletableFutures
+	https://openclassrooms.com/fr/courses/5684021-scale-up-your-code-with-java-concurrency/6655161-connect-concurrent-actions-using-completablefutures
+
 
 
 Done :
@@ -43,6 +44,22 @@ Etape 1
 - parcourir cours sur git
 - passer à l'étape 2
 
+Etape 2
+- identifier les tests unitaires qui échouent par intermitence
+	o: nearAllAttractions() (en plus d'être lent)
+		java.util.ConcurrentModificationException (run classique)
+		org.opentest4j.AssertionFailedError: expected: <26> but was: <1> (run debug, si pause entre li 589 et li 60)
+			- correction dans User.java li 73 : il manquait un ".attractionName" et le "!" était en trop
+				=> le test passe
+- comprendre ce qu'il se passe dans calculateRewards(...)
+	o sleep de 1 seconde juste après le démarrage du tracker (et juste avant calculateRewards(...)
+		 => échec du test par Failure #2
+		 Pourquoi ? je ne sais pas
+		 ? conflit entre le thread du tracker et le thread principal ?
+		 : ils utilisent tous les deux calculateRewards (qui ajoute potentiellement des trucs dans userReward)
+... comprendre CopyOnWriteArrayList
+	o utiliser CopyOnWriteArrayList sur User.userRewards => échec
+	o utiliser CopyOnWriteArrayList sur User.visitedLocations => réussite ! pk ? je sais pas trop, j'ai l'impression que le thread secondaire modifie cette liste aussi
 
 Etape 3
 - faire tourner la fonction de test qui ne marche pas
