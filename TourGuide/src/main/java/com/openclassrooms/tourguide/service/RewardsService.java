@@ -1,6 +1,7 @@
 package com.openclassrooms.tourguide.service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.stereotype.Service;
@@ -49,6 +50,20 @@ public class RewardsService {
 					}
 				}
 			}
+		}
+	}
+	
+	public void calculateRewards(User user, VisitedLocation visitedLocation) {
+		List<Attraction> attractions = gpsUtil.getAttractions();
+		
+		for(Attraction attraction : attractions) {
+			CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+			if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
+				if(nearAttraction(visitedLocation, attraction)) {
+					user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+				}
+			}
+			});
 		}
 	}
 	

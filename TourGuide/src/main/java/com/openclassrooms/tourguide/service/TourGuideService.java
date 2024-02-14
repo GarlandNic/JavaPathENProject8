@@ -15,6 +15,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -59,9 +62,9 @@ public class TourGuideService {
 		return user.getUserRewards();
 	}
 
-	public VisitedLocation getUserLocation(User user) {
+	public VisitedLocation getUserLocation(User user) throws InterruptedException, ExecutionException {
 		VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ? user.getLastVisitedLocation()
-				: trackUserLocation(user);
+				: trackUserLocation(user).get();
 		return visitedLocation;
 	}
 
@@ -88,11 +91,12 @@ public class TourGuideService {
 		return providers;
 	}
 
-	public VisitedLocation trackUserLocation(User user) {
-		VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
-		user.addToVisitedLocations(visitedLocation);
-		rewardsService.calculateRewards(user);
-		return visitedLocation;
+	public CompletableFuture<VisitedLocation> trackUserLocation(User user) throws InterruptedException, ExecutionException {
+		CompletableFuture<VisitedLocation> futureLocation = CompletableFuture
+				.supplyAsync(() -> gpsUtil.getUserLocation(user.getUserId()));
+		futureLocation.thenAccept(vL -> user.addToVisitedLocations(vL))
+				.thenAccept(vL -> rewardsService.calculateRewards(user));
+		return futureLocation;
 	}
 
  	// Get the SORTED closest five tourist attractions to the user - no matter how far away they are.
