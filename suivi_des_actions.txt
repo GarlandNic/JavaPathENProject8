@@ -1,20 +1,12 @@
 
 Suivi des actions menées
 
-Etape 4 :
-- faire tourner les tests de performance
-	-> ConcurrentModificationException
-	=> il faut que je finisse l'étape 2 : Done !
-- identifier les endroits où ça lague
-- lire les cours/ressources
-- modif du code ...
-- mettre à jour le excel pour comparer les performances
-
-
+Etape 5
+- 
 
 
 TODO :
-- identifier les endroits où ça lague
+- étape 5
 
 
 
@@ -67,4 +59,14 @@ Etape 3
 - implémenter le code qui va récupérer les 5 plus proches
 	o bonus : dans l'ordre de proximité
 - implémenter le code qui va transformer la liste en JSON
+
+Etape 4 :
+- faire tourner les tests de performance
+	-> ConcurrentModificationException
+	=> il faut que je finisse l'étape 2 : Done !
+- identifier les endroits où ça lague
+- lire les cours/ressources
+- modif du code ... CompletableFuture.runAsync( ... avec private final ExecutorService exec = Executors.newFixedThreadPool(100);
+- mettre à jour le excel pour comparer les performances
+
 
