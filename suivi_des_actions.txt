@@ -1,7 +1,13 @@
 
 Suivi des actions menées
 
-Etape 5
+Etape 5 : pipeline d'intégration continue
+- regarder outils du marché
+	o GitHub Actions
+	o Gitlab-CI
+	o Jenkins 
+- faire son choix
+- 3 étapes requises : compilation, test, build des artefacts.
 - 
 
 
@@ -22,7 +28,14 @@ Ressources :
 	https://www.baeldung.com/java-completablefuture	
 4 Connect Concurrent Actions Using CompletableFutures
 	https://openclassrooms.com/fr/courses/5684021-scale-up-your-code-with-java-concurrency/6655161-connect-concurrent-actions-using-completablefutures
-
+5 GitHub Actions, Maven
+	https://docs.github.com/fr/enterprise-cloud@latest/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+5 Intégration continue, démarche DevOps
+	https://openclassrooms.com/fr/courses/2035736-mettez-en-place-lintegration-et-la-livraison-continues-avec-la-demarche-devops
+5 deploy Maven projects to Artifactory with GitLab CI/CD
+	https://gitlab.com/gitlab-examples/maven/simple-maven-example/?_gl=1%2a1nkf3mi%2a_ga%2aODEwMjY2MDY0LjE2ODYyMjkyMDM.%2a_ga_ENFH3X7M5Y%2aMTY4NjIyOTIwMi4xLjEuMTY4NjIyOTIwNS4wLjAuMA	
+5 This repository is for the Build a Java app with Maven tutorial in the Jenkins User Documentation.
+	https://github.com/jenkins-docs/simple-java-maven-app/tree/master
 
 
 Done :
