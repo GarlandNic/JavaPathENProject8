@@ -37,8 +37,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: local lib
-      run: mvn org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file -Dfile=TourGuide/libs/*
+    - name: local lib 1
+      run: mvn org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file -Dfile=TourGuide/libs/RewardCentral.jar
+    - name: local lib 2
+      run: mvn org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file -Dfile=TourGuide/libs/TripPricer.jar
+    - name: local lib 3
+      run: mvn org.apache.maven.plugins:maven-install-plugin:3.1.1:install-file -Dfile=TourGuide/libs/gpsUtil.jar
     - name: Build with Maven
       run: mvn -B package --file TourGuide/pom.xml
 
