@@ -20,7 +20,7 @@
 	<repositories>
 	    <repository>
         	<id>project.local</id>
-        	<url>file:${project.basedir}/TourGuide/libs</url>
+        	<url>file:${project.basedir}/libs</url>
     	    </repository>
 	</repositories>
 	
