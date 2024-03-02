@@ -185,4 +185,14 @@ public class TourGuideService {
 		return Date.from(localDateTime.toInstant(ZoneOffset.UTC));
 	}
 
+	public void waitTillEnd() {
+		try {
+			this.exec.shutdown();
+			this.exec.awaitTermination(1L, TimeUnit.HOURS);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		this.rewardsService.waitTillEnd();
+	}
+
 }
