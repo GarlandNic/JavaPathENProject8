@@ -3,7 +3,6 @@ package com.openclassrooms.tourguide.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gson.Gson;
 import com.openclassrooms.tourguide.service.TourGuideService;
 import com.openclassrooms.tourguide.user.User;
 
@@ -48,10 +47,6 @@ public class AttractionsNearUser {
 
 	public void setAttractions(List<AttractionDto> attractions) {
 		this.attractions = attractions;
-	}
-	
-	public String toJSONString() {
-		return (new Gson()).toJson(this);
 	}
 
 	public double getLatitude() {

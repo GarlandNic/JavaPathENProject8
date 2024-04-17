@@ -1,18 +1,12 @@
 
 Suivi des actions menées
 
-Etape 5 : pipeline d'intégration continue
-- regarder outils du marché
-	o GitHub Actions
-	o Gitlab-CI
-	o Jenkins 
-- faire son choix
-- 3 étapes requises : compilation, test, build des artefacts.
-- 
-
+Etape 6 : Documentez et préparez la présentation
+- nettoyer le code
+- rempli le fichier word de documentation
+- préparer la présentation
 
 TODO :
-- étape 5
 
 
 
@@ -81,5 +75,13 @@ Etape 4 :
 - lire les cours/ressources
 - modif du code ... CompletableFuture.runAsync( ... avec private final ExecutorService exec = Executors.newFixedThreadPool(100);
 - mettre à jour le excel pour comparer les performances
+
+Etape 5 : pipeline d'intégration continue
+- regarder outils du marché
+	o GitHub Actions
+	o Gitlab-CI
+	o Jenkins 
+- faire son choix : Github Actions
+- 3 étapes requises : compilation, test, build des artefacts.
 
 
