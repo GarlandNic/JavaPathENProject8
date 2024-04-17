@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -47,7 +46,7 @@ public class TestPerformance {
 	 * TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
 
-	@Disabled
+//	@Disabled
 	@Test
 	public void highVolumeTrackLocation() throws InterruptedException, ExecutionException {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -69,14 +68,7 @@ public class TestPerformance {
 		for (User user : allUsers) {
 			tourGuideService.trackUserLocation(user);
 		}
-
-		int i = 0;
-		while(i<N) {
-			if(allUsers.get(i).getVisitedLocations().size() > nv)
-				i++;
-			else
-				TimeUnit.SECONDS.sleep(1);
-		}
+		tourGuideService.waitTillEnd(allUsers, nv);
 		
 		stopWatch.stop();
 		tourGuideService.tracker.stopTracking();
@@ -106,14 +98,7 @@ public class TestPerformance {
 		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 
 		allUsers.forEach(u -> rewardsService.calculateRewards(u));
-		
-		int i = 0;
-		while(i<N) {
-			if(allUsers.get(i).getUserRewards().size() > 0)
-				i++;
-			else
-				TimeUnit.SECONDS.sleep(1);
-		}
+		rewardsService.waitTillEnd(allUsers);
 
 		for (User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);

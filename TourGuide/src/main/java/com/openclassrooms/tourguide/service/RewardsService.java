@@ -99,13 +99,15 @@ public class RewardsService {
         return statuteMiles;
 	}
 
-	public void waitTillEnd() {
-		try {
-//			this.exec.awaitTermination(1L, TimeUnit.MINUTES);
-			this.exec.shutdown();
-			this.exec.awaitTermination(1L, TimeUnit.HOURS);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	// for testing purpose
+	public void waitTillEnd(List<User> allUsers) throws InterruptedException {
+		int N = allUsers.size();
+		int i = 0;
+		while(i<N) {
+			if(allUsers.get(i).getUserRewards().size() > 0)
+				i++;
+			else
+				TimeUnit.SECONDS.sleep(1);
 		}
 	}
 

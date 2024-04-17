@@ -185,14 +185,16 @@ public class TourGuideService {
 		return Date.from(localDateTime.toInstant(ZoneOffset.UTC));
 	}
 
-	public void waitTillEnd() {
-		try {
-			this.exec.shutdown();
-			this.exec.awaitTermination(1L, TimeUnit.HOURS);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+	// for testing purpose
+	public void waitTillEnd(List<User> allUsers, int nv) throws InterruptedException {
+		int N = allUsers.size();
+		int i = 0;
+		while(i<N) {
+			if(allUsers.get(i).getVisitedLocations().size() > nv)
+				i++;
+			else
+				TimeUnit.SECONDS.sleep(1);
 		}
-		this.rewardsService.waitTillEnd();
 	}
 
 }

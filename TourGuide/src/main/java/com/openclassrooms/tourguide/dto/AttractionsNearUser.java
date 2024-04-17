@@ -9,12 +9,6 @@ import com.openclassrooms.tourguide.user.User;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 
-	//  To be Returned as a JSON object that contains:
-// Name of Tourist attraction, 
-// Tourist attractions lat/long, 
-// The user's location lat/long, 
-// The distance in miles between the user's location and each of the attractions.
-// The reward points for visiting each Attraction.
 public class AttractionsNearUser {
 	
 	private String user;
