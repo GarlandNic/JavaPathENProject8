@@ -187,9 +187,9 @@ public class TourGuideService {
 
 	// for testing purpose
 	public void waitTillEnd() throws InterruptedException {
-		this.rewardsService.waitTillEnd();
 		this.exec.shutdown();
 		this.exec.awaitTermination(1, TimeUnit.HOURS);
+		this.rewardsService.waitTillEnd();
 	}
 
 }

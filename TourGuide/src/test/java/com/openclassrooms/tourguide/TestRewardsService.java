@@ -34,7 +34,7 @@ public class TestRewardsService {
 		Attraction attraction = gpsUtil.getAttractions().get(0);
 		user.addToVisitedLocations(new VisitedLocation(user.getUserId(), attraction, new Date()));
 		
-		tourGuideService.trackUserLocation(user).get();
+		tourGuideService.trackUserLocation(user);
 		tourGuideService.waitTillEnd();
 
 		List<UserReward> userRewards = user.getUserRewards();
