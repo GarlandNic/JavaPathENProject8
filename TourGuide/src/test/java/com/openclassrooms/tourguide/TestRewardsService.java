@@ -34,9 +34,8 @@ public class TestRewardsService {
 		Attraction attraction = gpsUtil.getAttractions().get(0);
 		user.addToVisitedLocations(new VisitedLocation(user.getUserId(), attraction, new Date()));
 		
-		int nv =user.getVisitedLocations().size();
-		tourGuideService.trackUserLocation(user);
-		tourGuideService.waitTillEnd(tourGuideService.getAllUsers(), nv);
+		tourGuideService.trackUserLocation(user).get();
+		tourGuideService.waitTillEnd();
 
 		List<UserReward> userRewards = user.getUserRewards();
 		tourGuideService.tracker.stopTracking();
@@ -61,7 +60,7 @@ public class TestRewardsService {
 		TourGuideService tourGuideService = new TourGuideService(gpsUtil, rewardsService);
 
 		rewardsService.calculateRewards(tourGuideService.getAllUsers().get(0));
-		rewardsService.waitTillEnd(tourGuideService.getAllUsers());
+		rewardsService.waitTillEnd();
 		
 		List<UserReward> userRewards = tourGuideService.getUserRewards(tourGuideService.getAllUsers().get(0));
 		tourGuideService.tracker.stopTracking();

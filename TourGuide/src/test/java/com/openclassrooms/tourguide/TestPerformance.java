@@ -9,7 +9,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.time.StopWatch;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import gpsUtil.GpsUtil;
@@ -62,13 +61,11 @@ public class TestPerformance {
 
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-		
-		int nv = allUsers.get(0).getVisitedLocations().size();
 
 		for (User user : allUsers) {
 			tourGuideService.trackUserLocation(user);
 		}
-		tourGuideService.waitTillEnd(allUsers, nv);
+		tourGuideService.waitTillEnd();
 		
 		stopWatch.stop();
 		tourGuideService.tracker.stopTracking();
@@ -78,7 +75,7 @@ public class TestPerformance {
 		assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	}
 
-	@Disabled
+//	@Disabled
 	@Test
 	public void highVolumeGetRewards() throws InterruptedException {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -98,7 +95,7 @@ public class TestPerformance {
 		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
 
 		allUsers.forEach(u -> rewardsService.calculateRewards(u));
-		rewardsService.waitTillEnd(allUsers);
+		rewardsService.waitTillEnd();
 
 		for (User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);

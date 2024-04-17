@@ -186,15 +186,10 @@ public class TourGuideService {
 	}
 
 	// for testing purpose
-	public void waitTillEnd(List<User> allUsers, int nv) throws InterruptedException {
-		int N = allUsers.size();
-		int i = 0;
-		while(i<N) {
-			if(allUsers.get(i).getVisitedLocations().size() > nv)
-				i++;
-			else
-				TimeUnit.SECONDS.sleep(1);
-		}
+	public void waitTillEnd() throws InterruptedException {
+		this.rewardsService.waitTillEnd();
+		this.exec.shutdown();
+		this.exec.awaitTermination(1, TimeUnit.HOURS);
 	}
 
 }
